@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Games from "./Games";
+import Bltable from "./BlTable";
 
 const App = () => {
+  // Tabelle https://www.openligadb.de/api/getbltable/bl1/2019
+
   const [spieltag, setSpielTag] = useState("1");
 
   var optionmap = [];
@@ -53,15 +56,13 @@ const App = () => {
           <div class="column" />
         </div>
         <div class="column">
+          <h1 className="title has-text-link"> Tabelle </h1>
+          <Bltable url="https://www.openligadb.de/api/getbltable/bl1/2019" />
           <h1 className="title has-text-link"> {spieltag}. Spieltag </h1>
-          {spieltag ? (
-            <Games
-              url="https://www.openligadb.de/api/getmatchdata/bl1/2019/"
-              spieltag={spieltag}
-            />
-          ) : (
-            ""
-          )}
+          <Games
+            url="https://www.openligadb.de/api/getmatchdata/bl1/2019/"
+            spieltag={spieltag}
+          />
         </div>
         <div class="column" />
       </div>
