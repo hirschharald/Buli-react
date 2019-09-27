@@ -50,6 +50,7 @@ const Bltable = props => {
     console.log(team);
 
     const props = {
+      key: index,
       points: team.Points,
       goals: team.Goals,
       spiele: team.Matches,
@@ -60,8 +61,13 @@ const Bltable = props => {
   });
 
   const sortedData = chartList.sort(compareValues("points"));
+  sortedData.map((team, i) => {
+    team.key = i + 1;
+    return { ...team };
+  });
 
   const headers = [
+    { dispname: "Rang", name: "key", type: "text" },
     { dispname: "Team", name: "team", type: "text" },
     { dispname: "Punkte", name: "points", type: "text" },
     { dispname: "Spiele", name: "spiele", type: "text" },
@@ -70,7 +76,7 @@ const Bltable = props => {
 
   return (
     <>
-      <Table data={chartList} headers={headers} />
+      <Table data={chartList} headers={headers} filterable={true} />
     </>
   );
 };

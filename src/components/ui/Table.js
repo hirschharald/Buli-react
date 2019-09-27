@@ -21,7 +21,7 @@ const compareValues = (key, neworder) => {
 };
 // Props: data, header
 const Table = props => {
-  var { data, onChangePage, headers } = props;
+  var { data, onChangePage, headers, filterable } = props;
   const [order, setOrder] = useState("asc");
 
   console.log("######", props);
@@ -44,6 +44,8 @@ const Table = props => {
     onChangePage(sortedData);
   };
 
+  const inputChangeHandler = () => {};
+
   let tableElement = null;
   tableElement = (
     <div className="card">
@@ -64,6 +66,17 @@ const Table = props => {
               </th>
             ))}
           </tr>
+          {filterable ? (
+            <tr>
+              {headers.map((header, key) => (
+                <th key={key} className="">
+                  <input id={key} onChange={inputChangeHandler} />
+                </th>
+              ))}
+            </tr>
+          ) : (
+            ""
+          )}
         </thead>
         <tbody>
           {data.map((row, key) => (
